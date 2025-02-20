@@ -120,38 +120,45 @@ class ListScreenContent extends StatelessWidget {
     var isLoadingMore = contentState.isLoadingMore;
     var error = contentState.error;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if (error != null) Text('Error: $error'),
-        if (isLoading) CircularProgressIndicator(),
-        if (!isLoading)
-          Expanded(
-            child: ListView.builder(
-              controller: scrollController,
-              itemCount: list.length,
-              itemBuilder: (BuildContext context, int index) {
-                if (index == list.length) {
-                  return Center(child: CircularProgressIndicator());
-                } else {
-                  final player = list[index];
-                  return PlayerListItem(
-                    key: Key(player.id?.toString() ?? ''),
-                    name: '${player.firstName ?? ''} ${player.lastName ?? ''}',
-                    imageUrl: 'https://randomuser.me/api/portraits/men/${player.jerseyNumber}.jpg',
-                    team: player.team?.fullName ?? '',
-                    onTap: () => logger.d('Tapped on ${player.firstName} ${player.lastName}'),
-                  );
-                }
-              },
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (error != null) Text('Error: $error'),
+          if (isLoading) 
+            SizedBox(
+              child: CircularProgressIndicator(),
+              width: 200,
+              height: 200,
             ),
-          ),
-        if (isLoadingMore)
-          LinearProgressIndicator(
-            value: null,
-            semanticsLabel: 'Linear progress indicator',
-          ),
-      ],
+          if (!isLoading)
+            Expanded(
+              child: ListView.builder(
+                controller: scrollController,
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if (index == list.length) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    final player = list[index];
+                    return PlayerListItem(
+                      key: Key(player.id?.toString() ?? ''),
+                      name: '${player.firstName ?? ''} ${player.lastName ?? ''}',
+                      imageUrl: 'https://randomuser.me/api/portraits/men/${player.jerseyNumber}.jpg',
+                      team: player.team?.fullName ?? '',
+                      onTap: () => logger.d('Tapped on ${player.firstName} ${player.lastName}'),
+                    );
+                  }
+                },
+              ),
+            ),
+          if (isLoadingMore)
+            LinearProgressIndicator(
+              value: null,
+              semanticsLabel: 'Linear progress indicator',
+            ),
+        ],
+      ),
     );
   }
 }
