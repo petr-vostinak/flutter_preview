@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:nba/presentation/screens/player_detail.dart';
 import 'package:provider/provider.dart';
 import 'package:nba/data/models/to/player_to.dart';
 import 'package:nba/data/repositories/players_list_repository.dart';
@@ -127,9 +128,9 @@ class ListScreenContent extends StatelessWidget {
           if (error != null) Text('Error: $error'),
           if (isLoading) 
             SizedBox(
-              child: CircularProgressIndicator(),
               width: 200,
               height: 200,
+              child: CircularProgressIndicator(),
             ),
           if (!isLoading)
             Expanded(
@@ -146,7 +147,13 @@ class ListScreenContent extends StatelessWidget {
                       name: '${player.firstName ?? ''} ${player.lastName ?? ''}',
                       imageUrl: 'https://randomuser.me/api/portraits/men/${player.jerseyNumber}.jpg',
                       team: player.team?.fullName ?? '',
-                      onTap: () => logger.d('Tapped on ${player.firstName} ${player.lastName}'),
+                      onTap: () => 
+                        //logger.d('Tapped on ${player.firstName} ${player.lastName}')
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PlayerDetail(playerId: player.id ?? 0)),
+                        )
+                      ,
                     );
                   }
                 },

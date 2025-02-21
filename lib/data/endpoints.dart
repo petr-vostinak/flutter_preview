@@ -11,7 +11,7 @@ class Endpoints {
 
   static const String playersList = '/v1/players';
 
-  static const String playerDetail = '/v1/players/{playerId}';
+  static const String playerDetail = '/v1/players/';
 
-  static const String teamDetail = '/v1/teams/{teamId}';
+  static const String teamDetail = '/v1/teams/';
 }

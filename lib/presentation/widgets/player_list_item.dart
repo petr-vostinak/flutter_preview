@@ -3,12 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class PlayerListItem extends StatelessWidget {
   const PlayerListItem({
-    Key? key,
+    super.key,
     required this.name,
     required this.imageUrl,
     required this.team,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final String name;
   final String imageUrl;
