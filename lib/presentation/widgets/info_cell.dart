@@ -26,7 +26,8 @@ class InfoCell extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(
+            Flexible(
+              fit: FlexFit.loose,
               flex: 1,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,10 +43,15 @@ class InfoCell extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        value,
-                        style: theme.textTheme.bodyLarge,
-                      )
+                        Expanded(
+                          child: Text(
+                            value,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.bodyLarge,
+                            textAlign: TextAlign.end,
+                          ),
+                        ),
                     ],
                   ),
                 ],

@@ -45,9 +45,23 @@ class DioClient {
     try {
       final response = await _dio.get(
         Endpoints.playerDetail+playerId.toString(),
-        
       );
       return PlayerDetailResponse.fromJson(response.data);
+    } on DioException catch (err) {
+      final errorMessage = ApiException.fromDioError(err).toString();
+      throw errorMessage;
+    } catch (e) {
+      if (kDebugMode) print(e);
+      throw e.toString();
+    }
+  }
+
+  Future<TeamDetailResponse?> getTeamDetail({required int teamId}) async {
+    try {
+      final response = await _dio.get(
+        Endpoints.teamDetail+teamId.toString(),
+      );
+      return TeamDetailResponse.fromJson(response.data);
     } on DioException catch (err) {
       final errorMessage = ApiException.fromDioError(err).toString();
       throw errorMessage;
