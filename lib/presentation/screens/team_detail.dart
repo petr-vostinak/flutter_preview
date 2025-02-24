@@ -90,8 +90,7 @@ class TeamDetailContent extends StatelessWidget {
             ),
           if (!isLoading)
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: ListView(
                 children: [
                   DecoratedBox(
                     decoration: BoxDecoration(

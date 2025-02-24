@@ -92,7 +92,7 @@ class PlayerDetailContent extends StatelessWidget {
             ),
           if (!isLoading) 
             Expanded(
-              child: Column(
+              child: ListView(
                 children: [
                   DecoratedBox(
                     decoration: BoxDecoration(
